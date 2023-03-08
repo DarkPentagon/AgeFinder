@@ -1,0 +1,44 @@
+import java.time.LocalDate;
+import java.time.Period;
+import java.util.Scanner;
+
+public class AgeFinder {
+    private static Scanner scanner;
+
+	public static void main(String[] args) {
+        scanner = new Scanner(System.in);
+
+        // Ask the user for their birth year, month, and day
+        System.out.print("Enter your birth year: ");
+        int birthYear = scanner.nextInt();
+
+        System.out.print("Enter your birth month (1-12): ");
+        int birthMonth = scanner.nextInt();
+
+        System.out.print("Enter your birth day (1-31): ");
+        int birthDay = scanner.nextInt();
+
+        // Calculate the birth date
+        LocalDate birthDate = LocalDate.of(birthYear, birthMonth, birthDay);
+
+        // Calculate the current date
+        LocalDate currentDate = LocalDate.now();
+
+        // Calculate the age
+        Period age = Period.between(birthDate, currentDate);
+
+        // Calculate the next birthday
+        LocalDate nextBirthday = birthDate.withYear(currentDate.getYear());
+        if (nextBirthday.isBefore(currentDate) || nextBirthday.isEqual(currentDate)) {
+            nextBirthday = nextBirthday.plusYears(1);
+        }
+        Period timeUntilNextBirthday = Period.between(currentDate, nextBirthday);
+
+        // Print the age and birth date
+        System.out.println("You are " + age.getYears() + " years, " + age.getMonths() + " months, and " + age.getDays() + " days old.");
+        System.out.println("Your birth date is " + birthDate.toString() + ".");
+
+        // Print the age at next birthday
+        System.out.println("You will be " + (age.getYears() + 1) + " years old in " + timeUntilNextBirthday.getMonths() + " months and " + timeUntilNextBirthday.getDays() + " days.");
+    }
+}
