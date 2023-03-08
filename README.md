@@ -1,2 +1,2 @@
 # AgeFinder
-AgeFinder by inputing BirthDate
+AgeFinder by Typing BirthDate
